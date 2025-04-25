@@ -10,6 +10,7 @@ WORKDIR /app
 COPY . .
 
 RUN npm ci
+RUN npm i lightningcss-linux-x64-gnu
 RUN npx prisma generate --generator client
 RUN npm run build
 
