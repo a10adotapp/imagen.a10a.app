@@ -43,7 +43,7 @@ export async function createLineStampGenerateQueue({
       }
     }
 
-    const filePath = `${publicDirname()}/images/line-stamps/${createId()}.${format}`;
+    const filePath = `${publicDirname()}/images/line-stamps/base/${createId()}.${format}`;
 
     await s.toFile(filePath);
 
