@@ -7,7 +7,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "マイスタンプGPT",
   description: "自分だけのスタンプ画像を作成できるミニアプリです。",
-}
+};
 
 export default async function Layout({
   children,
