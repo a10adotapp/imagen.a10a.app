@@ -9,7 +9,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm i
+RUN rm package-lock.json && npm i
 RUN npx prisma generate --generator client
 RUN npm run build
 
