@@ -25,8 +25,9 @@ model LineStampGenerateQueue {
 
   user User @relation(fields: [userId], references: [id])
 
-  images   LineStampImage[]
-  messages LineStampGenerateQueueMessage[]
+  images                      LineStampImage[]
+  lineStampTicketConsumptions LineStampTicketConsumption[]
+  messages                    LineStampGenerateQueueMessage[]
 
   @@map("line_stamp_generate_queues")
 }

@@ -38,6 +38,15 @@ erDiagram
   DateTime updated_at
   DateTime deleted_at "nullable"
 }
+"line_stamp_ticket_consumptions" {
+  String id PK
+  String line_stamp_generate_queue_id FK
+  String line_stamp_ticket_id FK
+  String user_id FK
+  DateTime created_at
+  DateTime updated_at
+  DateTime deleted_at "nullable"
+}
 "line_stamp_tickets" {
   String id PK
   String user_id FK
@@ -48,6 +57,8 @@ erDiagram
 "line_stamp_generate_queue_messages" }o--|| "line_stamp_generate_queues" : queue
 "line_stamp_images" }o--|| "line_stamp_generate_queues" : generateQueue
 "line_stamp_images" }o--|| "line_stamp_generate_queue_messages" : generateQueueMessage
+"line_stamp_ticket_consumptions" }o--|| "line_stamp_generate_queues" : generateQueue
+"line_stamp_ticket_consumptions" }o--|| "line_stamp_tickets" : ticket
 ```
 
 ### `line_stamp_generate_queue_messages`
@@ -88,6 +99,18 @@ erDiagram
   - `line_stamp_generate_queue_id`: 
   - `line_stamp_generate_queue_message_id`: 
   - `image_uri`: 生成画像URI
+  - `created_at`: 
+  - `updated_at`: 
+  - `deleted_at`: 
+
+### `line_stamp_ticket_consumptions`
+マイスタンプチケット使用履歴
+
+**Properties**
+  - `id`: 
+  - `line_stamp_generate_queue_id`: 
+  - `line_stamp_ticket_id`: 
+  - `user_id`: 
   - `created_at`: 
   - `updated_at`: 
   - `deleted_at`: 

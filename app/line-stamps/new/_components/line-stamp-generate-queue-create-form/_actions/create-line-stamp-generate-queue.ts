@@ -17,10 +17,19 @@ export async function createLineStampGenerateQueue({
 }): Promise<number> {
   const session = await auth();
 
+  const now = new Date();
+
   try {
     if (!session) {
       throw new Error("no session");
     }
+
+    const lineStampTicket = await prisma.lineStampTicket.findFirstOrThrow({
+      where: {
+        deletedAt: null,
+        userId: session.user.id,
+      },
+    });
 
     const imageType = imageData.replace(/^data:([^;]+);.+$/, "$1");
     const imageContent = imageData.replace(/^[^;]+;base64,/, "");
@@ -63,6 +72,24 @@ export async function createLineStampGenerateQueue({
         message,
         orderPriority: i + 1,
       })),
+    });
+
+    await prisma.lineStampTicketConsumption.create({
+      data: {
+        userId: session.user.id,
+        lineStampTicketId: lineStampTicket.id,
+        lineStampGenerateQueueId: lineStampGenerateQueue.id,
+      },
+    });
+
+    await prisma.lineStampTicket.update({
+      where: {
+        id: lineStampTicket.id,
+      },
+      data: {
+        deletedAt: now,
+        updatedAt: now,
+      },
     });
 
     return await prisma.lineStampGenerateQueue.count({

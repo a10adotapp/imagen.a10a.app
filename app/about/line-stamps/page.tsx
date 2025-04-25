@@ -1,4 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableRow } from "@/components/ui/table";
+import Image from "next/image";
 
 export default async function Page() {
   return (
@@ -15,7 +16,12 @@ export default async function Page() {
             </div>
 
             <div className="flex flex-col items-center gap-2">
-              <img className="max-w-48 max-h-48" src="https://qr-official.line.me/gs/M_317xnaan_GW.png?oat_content=qr" />
+              <Image
+                src="https://qr-official.line.me/gs/M_317xnaan_GW.png?oat_content=qr"
+                alt="official account"
+                width={360}
+                height={360}
+                className="max-w-48 max-h-48" />
 
               <a
                 href="https://lin.ee/a5Ozffh"

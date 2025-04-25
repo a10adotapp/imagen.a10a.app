@@ -12,5 +12,7 @@ model LineStampTicket {
 
   user User @relation(fields: [userId], references: [id])
 
+  consumptions LineStampTicketConsumption[]
+
   @@map("line_stamp_tickets")
 }

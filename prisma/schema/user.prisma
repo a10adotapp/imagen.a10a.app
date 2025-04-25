@@ -18,6 +18,7 @@ model User {
   lineStampGenerateQueueMessages LineStampGenerateQueueMessage[]
   lineStampImages                LineStampImage[]
   lineStampTickets               LineStampTicket[]
+  lineStampTicketConsumptions    LineStampTicketConsumption[]
 
   @@map("users")
 }

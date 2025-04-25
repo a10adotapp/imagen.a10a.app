@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "**.ngrok-free.app",
       },
+      {
+        protocol: "https",
+        hostname: "**.line.me",
+      },
     ],
   },
 };

@@ -1,0 +1,20 @@
+/// マイスタンプチケット使用履歴
+///
+/// @namespace マイスタンプ
+model LineStampTicketConsumption {
+  id String @id @default(cuid(2)) @db.VarChar(30)
+
+  lineStampGenerateQueueId String @map("line_stamp_generate_queue_id") @db.VarChar(30)
+  lineStampTicketId        String @map("line_stamp_ticket_id") @db.VarChar(30)
+  userId                   String @map("user_id") @db.VarChar(30)
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @default(now()) @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  generateQueue LineStampGenerateQueue @relation(fields: [lineStampGenerateQueueId], references: [id])
+  ticket        LineStampTicket        @relation(fields: [lineStampTicketId], references: [id])
+  user          User                   @relation(fields: [userId], references: [id])
+
+  @@map("line_stamp_ticket_consumptions")
+}
