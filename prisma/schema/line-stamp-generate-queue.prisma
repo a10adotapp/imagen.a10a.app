@@ -1,0 +1,32 @@
+/// マイスタンプ生成キュー
+///
+/// @namespace マイスタンプ
+model LineStampGenerateQueue {
+  id String @id @default(cuid(2)) @db.VarChar(30)
+
+  userId String @map("user_id") @db.VarChar(30)
+
+  /// ベース画像URI
+  imageUri String @map("image_uri")
+
+  /// ベース画像種別
+  imageType String @map("image_type")
+
+  /// Exif情報
+  imageExif Json? @map("image_exif")
+
+  /// 処理日時
+  /// NULL: 未処理
+  consumedAt DateTime? @map("consumed_at")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @default(now()) @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  user User @relation(fields: [userId], references: [id])
+
+  images   LineStampImage[]
+  messages LineStampGenerateQueueMessage[]
+
+  @@map("line_stamp_generate_queues")
+}

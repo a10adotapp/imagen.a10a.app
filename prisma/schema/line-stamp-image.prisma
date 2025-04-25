@@ -1,0 +1,23 @@
+/// マイスタンプ画像
+///
+/// @namespace マイスタンプ
+model LineStampImage {
+  id String @id @default(cuid(2)) @db.VarChar(30)
+
+  userId                          String @map("user_id") @db.VarChar(30)
+  lineStampGenerateQueueId        String @map("line_stamp_generate_queue_id") @db.VarChar(30)
+  lineStampGenerateQueueMessageId String @map("line_stamp_generate_queue_message_id") @db.VarChar(30)
+
+  /// 生成画像URI
+  imageUri String @map("image_uri")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @default(now()) @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  user                 User                          @relation(fields: [userId], references: [id])
+  generateQueue        LineStampGenerateQueue        @relation(fields: [lineStampGenerateQueueId], references: [id])
+  generateQueueMessage LineStampGenerateQueueMessage @relation(fields: [lineStampGenerateQueueMessageId], references: [id])
+
+  @@map("line_stamp_images")
+}

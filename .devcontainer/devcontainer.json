@@ -1,0 +1,16 @@
+{
+  "name": "imagen-a10a-app",
+  "dockerComposeFile": [
+    "compose.yaml"
+  ],
+  "service": "app",
+  "remoteUser": "vscode",
+  "workspaceFolder": "/home/vscode/imagen.a10a.app",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "prisma.prisma"
+      ]
+    }
+  }
+}
