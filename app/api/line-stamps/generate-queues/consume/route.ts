@@ -69,13 +69,15 @@ export async function POST(request: Request) {
                 size: "1024x1024",
                 n: 1,
                 prompt: [
-                  "LINEスタンプ用の画像を作成してください。",
+                  "売れるLINEスタンプを作りたいので、LINEスタンプ用の画像を作成してください。",
                   "",
                   "-----",
                   "# 手順",
                   "1. 人物や動物の抽出",
                   "  1-1. 画像に写っている人物や動物を抽出してください。",
                   "  1-2. 抽出した人物や動物の特徴を、LINEスタンプ風にデフォルメしたキャラクターを考えてください。",
+                  "    1-2-1. 人物や動物は２頭身くらいとし、顔がはっきり見えるようにしてください。",
+                  "    1-2-2. 人物や動物の特徴的な部分は強調し、デフォルメしすぎず、元の人物や動物が連想できるようにしてください。",
                   "2. 背景の作成",
                   "  2-1. ポップでポジティブなイメージの背景を作成してください。",
                   "  2-2. {メッセージ}に合うようなイラストを、アクセントになるように背景に入れ込んでください。",
@@ -118,6 +120,26 @@ export async function POST(request: Request) {
                   lineStampGenerateQueueMessageId: message.id,
                   imageUri: `${appUrl()}/images/line-stamps/generated/${fileName}`,
                 })),
+              });
+
+              await prisma.openaiUsage.create({
+                data: {
+                  usage: {
+                    input_tokens: generateResult.usage?.input_tokens,
+                    input_tokens_details: {
+                      image_tokens: generateResult.usage?.input_tokens_details.image_tokens,
+                      text_tokens: generateResult.usage?.input_tokens_details.text_tokens,
+                    },
+                    output_tokens: generateResult.usage?.output_tokens,
+                    total_tokens: generateResult.usage?.total_tokens,
+                  },
+                  metadata: {
+                    action: "openai.images.edit",
+                    model: "gpt-image-1",
+                    trigger: "lineStampGenerateQueue",
+                    triggerKey: lineStampGenerateQueue.id,
+                  },
+                },
               });
 
               break;

@@ -30,11 +30,13 @@ export function TicketPurchaseButton() {
       type="button"
       onClick={clickHandler}
       disabled={isBusy}
-      className="bg-linear-to-r from-emerald-400 to-cyan-400">
-      <div className="flex items-center gap-2">
-        <Ticket size={12} />
+      className="p-2 h-auto bg-linear-to-r from-emerald-400 to-cyan-400">
+      <div className="flex jusity-center items-center gap-4">
+        <Ticket className="!size-8" />
 
-        <div className="font-bold">チケットを購入してマイスタンプを作成する</div>
+        <div className="text-start font-bold">
+          チケットを購入して<br />マイスタンプを作成する
+        </div>
       </div>
     </Button>
   );

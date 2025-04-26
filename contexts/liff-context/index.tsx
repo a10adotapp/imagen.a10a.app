@@ -68,11 +68,17 @@ export function LiffContextProvider({
       liff: liffObject,
       error,
     }}>
-      {!session && <LoadingSession />}
+      {(() => {
+        if (!liffObject) {
+          return <LoadingAssets />;
+        }
 
-      {!liffObject && <LoadingAssets />}
+        if (!session) {
+          return <LoadingSession />;
+        }
 
-      {liffObject && children}
+        return children;
+      })()}
     </LiffContext>
   );
 }

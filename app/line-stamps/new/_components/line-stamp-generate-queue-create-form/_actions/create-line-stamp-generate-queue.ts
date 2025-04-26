@@ -95,6 +95,7 @@ export async function createLineStampGenerateQueue({
     return await prisma.lineStampGenerateQueue.count({
       where: {
         deletedAt: null,
+        consumedAt: null,
         createdAt: {
           lte: lineStampGenerateQueue.createdAt,
         },

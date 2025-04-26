@@ -95,7 +95,13 @@ export function LineStampsCreateForm() {
       className="flex flex-col gap-4">
       <div
         className="flex flex-col gap-2">
-        <div className="text-sm font-bold">スタンプにする写真</div>
+        <div className="text-sm font-bold">
+          スタンプにする写真を選んでください
+        </div>
+
+        <div className="text-xs text-gray-600">
+          スタンプにする写真は人物や動物の顔がはっきり写っているものにしてください。
+        </div>
 
         <label
           className="flex justify-center items-center w-full aspect-square rounded-lg"
@@ -117,9 +123,9 @@ export function LineStampsCreateForm() {
           {!imageData && (
             <div className="flex flex-col items-center gap-4">
               {// eslint-disable-next-line jsx-a11y/alt-text
-              }<Image size={32} />
+              }<Image className="!size-20" />
 
-              <div className="text-sm font-bold">スタンプにする写真を選択してください</div>
+              <div className="text-xs font-bold">スタンプにする写真を選択してください</div>
             </div>
           )}
         </label>
@@ -127,7 +133,11 @@ export function LineStampsCreateForm() {
 
       <div
         className="flex flex-col gap-2">
-        <div className="text-sm font-bold">メッセージ</div>
+        <div className="text-sm font-bold">スタンプに入れるメッセージ</div>
+
+        <div className="text-xs text-gray-600">
+          スタンプに入れるメッセージを入力してください。
+        </div>
 
         {messages.map((message, i) => {
           const key = MD5(`${i}:${message}`).toString();

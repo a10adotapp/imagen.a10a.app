@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Sparkles, Ticket } from "lucide-react";
 import Link from "next/link";
 import { countLineStampTicketCached } from "./_actions/count-line-stamp-ticket";
 import { listLineStampGenerateQueueCached } from "./_actions/list-line-stamp-generate-queue";
@@ -17,10 +18,25 @@ export default async function Page() {
       )}
 
       {lineStampTicketCount > 0 && (
-        <Button asChild className="bg-linear-to-r from-emerald-400 to-cyan-400">
+        <Button asChild className="p-2 h-auto bg-linear-to-r from-emerald-400 to-cyan-400">
           <Link href="/line-stamps/new">
-            <div className="font-bold">
-              マイスタンプを作る
+            <div className="flex jusity-center items-center gap-4">
+              <Sparkles className="!size-8" />
+
+              <div className="flex flex-col items-start gap-1">
+                <div className="text-start font-bold">
+                  チケットを１枚使用して<br />
+                  マイスタンプを作る
+                </div>
+
+                <div className="flex items-center gap-2 opacity-90">
+                  <Ticket />
+
+                  <div className="text-xs">
+                    残りチケット数：{lineStampTicketCount}
+                  </div>
+                </div>
+              </div>
             </div>
           </Link>
         </Button>
