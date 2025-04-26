@@ -132,7 +132,7 @@ class LineStampGenerateQueueConsumer {
                   userId: lineStampGenerateQueue.userId,
                   lineStampGenerateQueueId: lineStampGenerateQueue.id,
                   lineStampGenerateQueueMessageId: message.id,
-                  imageUri: `/images/line-stamps/generated/${fileName}`,
+                  imageUri: `/assets/images/line-stamps/generated/${fileName}`,
                 })),
               });
 
