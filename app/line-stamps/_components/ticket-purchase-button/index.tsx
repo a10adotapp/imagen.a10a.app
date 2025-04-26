@@ -19,7 +19,7 @@ export function TicketPurchaseButton() {
         success: "請求情報の作成に成功しました",
       });
 
-      window.open(url);
+      location.assign(url);
     } finally {
       setIsBusy(false);
     }
