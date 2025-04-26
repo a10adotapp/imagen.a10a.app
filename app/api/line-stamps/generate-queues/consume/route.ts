@@ -1,4 +1,3 @@
-import { appUrl } from "@/lib/env/app-url";
 import { cronscriptToken } from "@/lib/env/cronscript-token";
 import { publicDirname } from "@/lib/env/public-dirname";
 import logger from "@/lib/logger";
@@ -118,7 +117,7 @@ export async function POST(request: Request) {
                   userId: lineStampGenerateQueue.userId,
                   lineStampGenerateQueueId: lineStampGenerateQueue.id,
                   lineStampGenerateQueueMessageId: message.id,
-                  imageUri: `${appUrl()}/assets/images/line-stamps/generated/${fileName}`,
+                  imageUri: `/images/line-stamps/generated/${fileName}`,
                 })),
               });
 
