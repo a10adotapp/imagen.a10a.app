@@ -1,6 +1,8 @@
 import { listOpenaiUsageCached } from "./_actions/list-openai-usage";
 import { OpenaiUsageList } from "./_components/openai-usage-list";
 
+export const dynamic = "force-dynamic";
+
 export default async function Page() {
   const openaiUsages = await listOpenaiUsageCached();
 
