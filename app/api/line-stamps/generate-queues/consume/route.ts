@@ -118,7 +118,7 @@ export async function POST(request: Request) {
                   userId: lineStampGenerateQueue.userId,
                   lineStampGenerateQueueId: lineStampGenerateQueue.id,
                   lineStampGenerateQueueMessageId: message.id,
-                  imageUri: `${appUrl()}/images/line-stamps/generated/${fileName}`,
+                  imageUri: `${appUrl()}/assets/images/line-stamps/generated/${fileName}`,
                 })),
               });
 
