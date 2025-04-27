@@ -2,6 +2,8 @@ import { LayoutProps } from "@/lib/props";
 import { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 
+import { AppContextProvider } from "@/contexts/app-context";
+import { appUrl } from "@/lib/env/app-url";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,9 +17,11 @@ export default async function Layout({
   return (
     <html>
       <body className="bg-gray-100">
-        {children}
+        <AppContextProvider appUrl={appUrl()}>
+          {children}
 
-        <Toaster />
+          <Toaster />
+        </AppContextProvider>
       </body>
     </html>
   );

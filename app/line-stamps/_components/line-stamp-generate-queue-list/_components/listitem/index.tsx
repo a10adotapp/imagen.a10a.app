@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
+import { useAppContext } from "@/contexts/app-context";
 import { useLiffContext } from "@/contexts/liff-context";
 import { format as formatDate } from "@formkit/tempo";
 import { LineStampGenerateQueue, LineStampGenerateQueueMessage, LineStampImage } from "@prisma/client";
@@ -23,6 +24,8 @@ export function Listitem({
     }
   )
 }) {
+  const { appUrl } = useAppContext();
+
   const { liff } = useLiffContext();
 
   return (
@@ -74,6 +77,10 @@ export function Listitem({
                         type="button"
                         onClick={async () => {
                           try {
+                            if (!liff?.isApiAvailable("shareTargetPicker")) {
+                              return toast.error("シェア機能が有効になっていません");
+                            }
+
                             await liff?.shareTargetPicker([
                               {
                                 type: "image",
@@ -108,6 +115,10 @@ export function Listitem({
             variant="secondary"
             onClick={async () => {
               try {
+                if (!appUrl) {
+                  return toast.error("アプリケーションの設定が完了していません");
+                }
+
                 if (!confirm([
                   "トークルームにマイスタンプを送信しますか？",
                   "",
@@ -118,11 +129,17 @@ export function Listitem({
                   return;
                 }
 
+                const chatMessageWritePermission = await liff?.permission.query("chat_message.write");
+
+                if (chatMessageWritePermission?.state !== "granted") {
+                  return await liff?.permission.requestAll();
+                }
+
                 await liff?.sendMessages(
                   lineStampGenerateQueue.messages
                     .flatMap((message) => message.images.flatMap((image) => ({
                       type: "image",
-                      originalContentUrl: image.imageUri,
+                      originalContentUrl: `${appUrl}${image.imageUri}`,
                       previewImageUrl: image.imageUri,
                     }))),
                 );
