@@ -140,7 +140,7 @@ export function Listitem({
                     .flatMap((message) => message.images.flatMap((image) => ({
                       type: "image",
                       originalContentUrl: `${appUrl}${image.imageUri}`,
-                      previewImageUrl: image.imageUri,
+                      previewImageUrl: `${appUrl}${image.imageUri}`,
                     }))),
                 );
 
