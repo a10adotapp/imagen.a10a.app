@@ -1,10 +1,11 @@
+import { AppContextProvider } from "@/contexts/app-context";
+import { appUrl } from "@/lib/env/app-url";
 import { LayoutProps } from "@/lib/props";
 import { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
-
-import { AppContextProvider } from "@/contexts/app-context";
-import { appUrl } from "@/lib/env/app-url";
 import "./globals.css";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "マイスタンプGPT",
